@@ -2,18 +2,21 @@ var MapWrapper = function(container, coords, zoom) {
   this.googleMap = new google.maps.Map(container, {
     center: coords,
     zoom: zoom
+
   })
-  this.markers = []
+  this.googleMap.setMapTypeId('hybrid')
 }
 
 MapWrapper.prototype.goTo = function (country) {
   var position = {lat: parseFloat(country.latlng[0]), lng: parseFloat(country.latlng[1])}
   this.googleMap.setCenter(position)
+  this.googleMap.setZoom(7)
 }
 
 MapWrapper.prototype.goToISS = function (issPosition) {
   var position = {lat: parseFloat(issPosition.iss_position.latitude), lng: parseFloat(issPosition.iss_position.longitude)}
   this.googleMap.setCenter(position)
+  this.googleMap.setZoom(8)
 }
 
 MapWrapper.prototype.addClickEvent = function () {

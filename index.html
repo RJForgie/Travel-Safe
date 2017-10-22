@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>World Info Map</title>
+    <title>Travel Smart</title>
+    <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript" src="pieChart.js"></script>
     <script src='app.js'></script>
     <link rel='stylesheet' type='text/css' href='main.css'>
     <script src = "https://maps.googleapis.com/maps/api/js"></script>
@@ -9,16 +11,46 @@
     <script src = "app.js"></script>
   </head>
   <body>
-    <select id="country-select"></select>
-    <p id="name"></p>
-    <p id="population"></p>
-    <p id="region"></p>
-    <p id="travel-briefing"></p>
-    <p id="travel-water-safety"></p>
+
+    <div id="banner">
+      <h1>Travel Smart</h1>
+    </div>
+
+
+
+    <div id="selects">
+      <select id="country-select"></select>
+    </div>
+
     <p id="water-warning"></p>
-    <ul id="vaccinations-list">Vaccinations required:</ul>
+
     <div id="main-map"></div>
-    <button id="find-ISS-btn">Where is the ISS?</button>
+    <div id="buttons">
+      <button id="find-ISS-btn">Find International Space Station</button>
+    </div>
+
+    <div id="pie-chart"></div>
+    <div class="Grid">
+
+      <div class="Grid-cell">
+        <h6>Country Information</h6>
+        <p id="name"></p>
+        <p id="capital"></p>
+        <p id="population"></p>
+      </div>
+
+      <div class="Grid-cell">
+        <h6>Safety</h6>
+        <p id="travel-briefing"></p>
+      </div>
+
+      <div class="Grid-cell">
+        <h6>Health</h6>
+        <p id="travel-water-safety"></p>
+        <ul id="vaccinations-list">Vaccinations required:</ul>
+      </div>
+
+    </div>
 
   </body>
 </html>

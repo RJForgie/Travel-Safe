@@ -10,7 +10,6 @@ var initialize = function(){
   renderMap(countryToRestore)
   makeRequestTravelBriefing(countryToRestore)
 
-
   var findISSButton = document.getElementById("find-ISS-btn")
   findISSButton.addEventListener('click', findTheISS)
 
@@ -23,13 +22,24 @@ var initialize = function(){
     request.addEventListener( "load", function() {
       var result = JSON.parse( this.responseText )
       findCountryFromClick(result)
-
     })
     request.send()
   })
-
-
 }
+
+// var borderCountryPopDensity = function (country) {
+//   chartCountries = []
+//   for (alphaCode of country.borders) {
+//     for (bordering of countries) {
+//       if (bordering.alpha3Code === alphaCode) {
+//           chartCountries.push(bordering)
+//       }
+//     }
+//   }
+//   chartCountries.push(country)
+//   console.log(chartCountries)
+//
+// }
 
 var findCountryFromClick = function (result) {
   var addressString = result.results[0].formatted_address
@@ -63,7 +73,7 @@ var makeRequestLandWater = function( position ) {
   request.addEventListener( "load", function() {
     var result = JSON.parse( this.responseText )
     var waterWarning = document.getElementById("water-warning")
-    if (result.water) waterWarning.innerText = "Water"
+    if (result.water) alert("You've clicked water, please click on land to select a country!")
   })
   request.send()
 }
@@ -74,7 +84,6 @@ var makeRequestTravelBriefing = function( country ) {
   request.open( "GET", newurl );
   request.addEventListener( "load", function() {
     var result = JSON.parse( this.responseText )
-    console.log(result)
     renderTravelBriefing(result)
   })
   request.send()
@@ -106,32 +115,32 @@ var addCountriesToList = function( countries, countryToRestore ) {
     render(country)
     moveMap(country)
     makeRequestTravelBriefing(country)
-    // mainMap.addMarker(country)
+    // borderCountryPopDensity(country)
   })
 }
 
 var render = function(country){
   var countryName = document.getElementById("name")
   countryName.innerText = "Name: " + country.name
+  var countryCapital = document.getElementById("capital")
+  countryCapital.innerText = "Capital: " + country.capital
   var countryPopulation = document.getElementById("population")
   countryPopulation.innerText = "Population: " + country.population
-  var countryRegion = document.getElementById("region")
-  countryRegion.innerText = "Region: " + country.region
+
 }
 
 var renderTravelBriefing = function(country){
   var countryBriefing = document.getElementById("travel-briefing")
   countryBriefing.innerText = "Advice: " + country.advise.UA.advise
   var countryWaterSafety = document.getElementById("travel-water-safety")
-  countryWaterSafety.innerText = "Water safe to drink?: " + country.water.short
+  countryWaterSafety.innerText = "Drinking water: " + country.water.short
   var vaccinationsList = document.getElementById("vaccinations-list")
+  vaccinationsList.innerHTML = "Vaccinations Advised: "
   for (vaccination of country.vaccinations){
-    console.log(vaccination)
   var li = document.createElement("li")
   li.innerText = vaccination.name
   vaccinationsList.appendChild(li)
   }
-
 }
 
 var restore = function () {
@@ -155,5 +164,4 @@ var moveMap = function (country) {
   mainMap.goTo(country)
 }
 
-
-window.addEventListener("load", initialize);
+window.addEventListener("load", initialize)
