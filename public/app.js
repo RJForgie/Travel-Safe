@@ -8,6 +8,8 @@ var initialize = function(){
   var countryToRestore = restore()
   render(countryToRestore)
   renderMap(countryToRestore)
+  makeRequestTravelBriefing(countryToRestore)
+
 
   var findISSButton = document.getElementById("find-ISS-btn")
   findISSButton.addEventListener('click', findTheISS)
@@ -38,7 +40,6 @@ var findCountryFromClick = function (result) {
       select.options.selectedIndex = index
       var event = new Event('change')
       select.dispatchEvent(event)
-      // select.change()
     }
   })
 }
@@ -63,6 +64,18 @@ var makeRequestLandWater = function( position ) {
     var result = JSON.parse( this.responseText )
     var waterWarning = document.getElementById("water-warning")
     if (result.water) waterWarning.innerText = "Water"
+  })
+  request.send()
+}
+
+var makeRequestTravelBriefing = function( country ) {
+  var newurl = "https://travelbriefing.org/" + country.name + "?format=json"
+  var request = new XMLHttpRequest()
+  request.open( "GET", newurl );
+  request.addEventListener( "load", function() {
+    var result = JSON.parse( this.responseText )
+    console.log(result)
+    renderTravelBriefing(result)
   })
   request.send()
 }
@@ -92,6 +105,7 @@ var addCountriesToList = function( countries, countryToRestore ) {
     save(country)
     render(country)
     moveMap(country)
+    makeRequestTravelBriefing(country)
     // mainMap.addMarker(country)
   })
 }
@@ -103,6 +117,21 @@ var render = function(country){
   countryPopulation.innerText = "Population: " + country.population
   var countryRegion = document.getElementById("region")
   countryRegion.innerText = "Region: " + country.region
+}
+
+var renderTravelBriefing = function(country){
+  var countryBriefing = document.getElementById("travel-briefing")
+  countryBriefing.innerText = "Advice: " + country.advise.UA.advise
+  var countryWaterSafety = document.getElementById("travel-water-safety")
+  countryWaterSafety.innerText = "Water safe to drink?: " + country.water.short
+  var vaccinationsList = document.getElementById("vaccinations-list")
+  for (vaccination of country.vaccinations){
+    console.log(vaccination)
+  var li = document.createElement("li")
+  li.innerText = vaccination.name
+  vaccinationsList.appendChild(li)
+  }
+
 }
 
 var restore = function () {
