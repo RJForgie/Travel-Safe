@@ -27,20 +27,6 @@ var initialize = function(){
   })
 }
 
-// var borderCountryPopDensity = function (country) {
-//   chartCountries = []
-//   for (alphaCode of country.borders) {
-//     for (bordering of countries) {
-//       if (bordering.alpha3Code === alphaCode) {
-//           chartCountries.push(bordering)
-//       }
-//     }
-//   }
-//   chartCountries.push(country)
-//   console.log(chartCountries)
-//
-// }
-
 var findCountryFromClick = function (result) {
   var addressString = result.results[0].formatted_address
   countries.forEach(function (country, index){
