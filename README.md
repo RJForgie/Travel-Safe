@@ -27,3 +27,7 @@ The APIs used were:
 
 * Integration of further APIs to add currency exchange and climate information
 * Addition of charts to display more detailed country information
+
+## Live Demo
+
+Please check out the live [demo](https://travel-safe-app.herokuapp.com/)
