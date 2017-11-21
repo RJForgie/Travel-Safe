@@ -9,9 +9,9 @@ app.get('/', function (req, res) {
 app.use(express.static('public'));
 
 
-var server = app.listen(process.env.PORT || 3000, function () {
+var server = app.listen(process.env.PORT || 5000, function () {
   var host = server.address().address;
-  var port = process.env.PORT || 3000;
+  var port = process.env.PORT || 5000;
 
   console.log('Example app listening at http://%s:%s', host, port);
 });
