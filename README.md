@@ -13,7 +13,6 @@ The APIs used were:
 * [RESTCountries](https://restcountries.eu)
 * [Travel Briefing](https://travelbriefing.org/api)
 * [On Water](https://onwater.io)
-* [Open Notify](http://open-notify.org/Open-Notify-API/ISS-Location-Now/)
 
 ## Functionality
 
