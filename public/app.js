@@ -16,7 +16,7 @@ var initialize = function(){
   google.maps.event.addListener(mainMap.googleMap, 'click', function (event) {
     var position = {lat: event.latLng.lat(), lng: event.latLng.lng()}
     makeRequestLandWater(position)
-    var newurl = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.lat + "," + position.lng
+    var newurl = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.lat + "," + position.lng
     var request = new XMLHttpRequest()
     request.open( "GET", newurl );
     request.addEventListener( "load", function() {
@@ -55,7 +55,7 @@ var makeRequestREST = function( url ) {
 var makeRequestLandWater = function( position ) {
   var newurl = "https://api.onwater.io/api/v1/results/" + position.lat + "," + position.lng
   var request = new XMLHttpRequest()
-  request.open( "GET", newurl );
+  request.open( "GET", newurl, true );
   request.addEventListener( "load", function() {
     var result = JSON.parse( this.responseText )
     var waterWarning = document.getElementById("water-warning")
@@ -67,7 +67,7 @@ var makeRequestLandWater = function( position ) {
 var makeRequestTravelBriefing = function( country ) {
   var newurl = "https://travelbriefing.org/" + country.name + "?format=json"
   var request = new XMLHttpRequest()
-  request.open( "GET", newurl );
+  request.open( "GET", newurl);
   request.addEventListener( "load", function() {
     var result = JSON.parse( this.responseText )
     renderTravelBriefing(result)
@@ -78,7 +78,7 @@ var makeRequestTravelBriefing = function( country ) {
 var findTheISS = function () {
   var ISSurl = "http://api.open-notify.org/iss-now.json"
   var request = new XMLHttpRequest()
-  request.open( "GET", ISSurl );
+  request.open( "GET", ISSurl, true );
   request.addEventListener( "load", function() {
     var issPosition = JSON.parse( this.responseText )
     mainMap.goToISS(issPosition)
