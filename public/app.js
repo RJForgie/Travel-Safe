@@ -10,8 +10,8 @@ var initialize = function(){
   renderMap(countryToRestore)
   makeRequestTravelBriefing(countryToRestore)
 
-  var findISSButton = document.getElementById("find-ISS-btn")
-  findISSButton.addEventListener('click', findTheISS)
+  // var findISSButton = document.getElementById("find-ISS-btn")
+  // findISSButton.addEventListener('click', findTheISS)
 
   google.maps.event.addListener(mainMap.googleMap, 'click', function (event) {
     var position = {lat: event.latLng.lat(), lng: event.latLng.lng()}
@@ -75,16 +75,16 @@ var makeRequestTravelBriefing = function( country ) {
   request.send()
 }
 
-var findTheISS = function () {
-  var ISSurl = "http://api.open-notify.org/iss-now.json"
-  var request = new XMLHttpRequest()
-  request.open( "GET", ISSurl, true );
-  request.addEventListener( "load", function() {
-    var issPosition = JSON.parse( this.responseText )
-    mainMap.goToISS(issPosition)
-  })
-  request.send()
-}
+// var findTheISS = function () {
+//   var ISSurl = "http://api.open-notify.org/iss-now.json"
+//   var request = new XMLHttpRequest()
+//   request.open( "GET", ISSurl, true );
+//   request.addEventListener( "load", function() {
+//     var issPosition = JSON.parse( this.responseText )
+//     mainMap.goToISS(issPosition)
+//   })
+//   request.send()
+// }
 
 var addCountriesToList = function( countries, countryToRestore ) {
   var select = document.getElementById("country-select")
