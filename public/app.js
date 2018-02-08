@@ -76,7 +76,7 @@ var makeRequestTravelBriefing = function( country ) {
 }
 
 var findTheISS = function () {
-  var ISSurl = "https://api.open-notify.org/iss-now.json"
+  var ISSurl = "http://api.open-notify.org/iss-now.json"
   var request = new XMLHttpRequest()
   request.open( "GET", ISSurl, true );
   request.addEventListener( "load", function() {
